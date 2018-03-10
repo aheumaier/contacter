@@ -1,0 +1,66 @@
+<%= form_with(model: contact, local: true) do |form| %>
+
+
+    <% if contact.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(contact.errors.count, "error") %> prohibited this contact from being saved:</h2>
+
+          <ul>
+            <% contact.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+      <%= form.label :fname %>
+      <%= form.text_field :fname, id: :contact_fname %>
+    </div>
+
+    <div class="field">
+      <%= form.label :lname %>
+      <%= form.text_field :lname, id: :contact_lname %>
+    </div>
+
+    <div class="field">
+      <%= form.label :name %>
+      <%= form.text_field :name, id: :contact_name %>
+    </div>
+
+    <div class="field">
+      <%= form.label :email %>
+      <%= form.text_field :email, id: :contact_email %>
+    </div>
+
+    <div class="field">
+      <%= form.label :phone %>
+      <%= form.text_field :phone, id: :contact_phone %>
+    </div>
+
+    <div class="field">
+      <%= form.label :mobile %>
+      <%= form.text_field :mobile, id: :contact_mobile %>
+    </div>
+
+    <div class="field">
+      <%= form.label :position %>
+      <%= form.text_field :position, id: :contact_position %>
+    </div>
+
+    <div class="field">
+      <%= form.label :source %>
+      <%= form.text_field :source, id: :contact_source %>
+    </div>
+
+    <div class="field">
+      <%= form.label :company %>
+      <%= form.collection_select(:company_id, Company.all, :id, :name) %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit %>
+    </div>
+
+
+<% end %>
