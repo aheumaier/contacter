@@ -20,6 +20,7 @@ class CompaniesController < ApplicationController
   # GET /companies/new
   def new
     @company = Company.new
+    @company.addresses.build
   end
 
   # GET /companies/1/edit
