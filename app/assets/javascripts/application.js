@@ -12,5 +12,8 @@
 //
 //= require rails-ujs
 //= require turbolinks
+//= require jquery
+//= require Chart.bundle
+//= require chartkick
 //= require AdminLTE/bootstrap/js/bootstrap
 //= require AdminLTE/dist/js/app.js

@@ -5,7 +5,7 @@ class ContactsController < ApplicationController
   # GET /contacts.json
   def index
     @contacts = if params[:term]
-                   Contact.where('lname LIKE ?', "%#{params[:term]}%").page params[:page]
+                   Contact.where('lname LIKE ?', "%#{params[:term]}%").or(Contact.where('email LIKE ?', "%#{params[:term]}%")).page params[:page]
                  else
                    Contact.all.page params[:page]
                  end

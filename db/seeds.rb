@@ -12,8 +12,16 @@ quote_chars = %w(" | ~ ^ & *)
 CSV.foreach('/home/aheumaier/Downloads/contacs.csv', { :col_sep => ',', headers: :first_row, quote_char: quote_chars.shift }) do |row|
 
   begin
+
+    unless (row[4].to_s.length == 0) || (row[4].nil?)
+      company_name = row[4]
+    else
+      company_name = 'UNSET'
+    end
+
     company = Company.find_or_create_by( :name => row[4])
     address = Address.find_by_street(row[23])
+
     unless (row[23].to_s.length == 0) || (address != nil)
       company.update!(
           :website => row[5],

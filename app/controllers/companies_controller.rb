@@ -15,6 +15,7 @@ class CompaniesController < ApplicationController
   # GET /companies/1
   # GET /companies/1.json
   def show
+    @company_contacts = Contact.where(:company_id => params[:id])
   end
 
   # GET /companies/new

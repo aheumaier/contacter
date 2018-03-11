@@ -23,17 +23,16 @@
       <div class="box-body no-padding">
 
         <!-- Line Chart - Single Series -->
-        <div class="col-xs-6">
-          <h3>Billed Hours By Week</h3>
-          <%= pie_chart Company.all.count %>
-        </div>
+        <h3>Contacts_by_Company</h3>
+
+
 
       </div>
+
       <!-- /.box-body -->
     </div>
 
-    <%= paginate @contacts %>
-
+    <%= pie_chart @contacts_by_company, defer: true, width: "800px", height: "500px", label: "Count" %>
   </section>
   <!-- /.content -->
 </div>
