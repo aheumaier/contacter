@@ -63,9 +63,13 @@ CSV.foreach('/home/aheumaier/Downloads/contacs.csv', { :col_sep => ',', headers:
         :source => row[0],
         :company_id => company.id
     )
+
+
+    pp contact.inspect
   rescue ActiveRecord::RecordNotUnique
     puts "Info duplicate skipped: "+row.to_s
   end
+
 
 
 end

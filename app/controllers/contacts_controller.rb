@@ -5,11 +5,10 @@ class ContactsController < ApplicationController
   # GET /contacts.json
   def index
     @contacts = if params[:term]
-                   Contact.fulltext_search("#{params[:term]}") #.page params[:page]
+                   Contact.fulltext_search("#{params[:term]}",  { :max_results => 100 }) #.page params[:page]
                  else
-                   Contact.all.page params[:page]
+                   Contact.includes(:company).all.page params[:page]
                 end
-    puts @contacts.inspect
   end
 
   # GET /contacts/1

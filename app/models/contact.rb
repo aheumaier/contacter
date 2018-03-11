@@ -14,7 +14,7 @@ class Contact
   field :position, type: String
   field :source, type: String
 
-  fulltext_search_in :name, :email
+  fulltext_search_in :name, :email, :position, :alphabet => 'abcdefghijklmnopqrstuvwxyz0123456789.@', :ngram_width => 3
 
 
 
