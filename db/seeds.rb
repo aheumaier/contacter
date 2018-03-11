@@ -20,7 +20,7 @@ CSV.foreach('/home/aheumaier/Downloads/contacs.csv', { :col_sep => ',', headers:
     end
 
     company = Company.find_or_create_by( :name => row[4])
-    address = Address.find_by_street(row[23])
+    address = Address.find_by(  street: row[23])
 
     unless (row[23].to_s.length == 0) || (address != nil)
       company.update!(

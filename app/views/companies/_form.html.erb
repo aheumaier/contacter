@@ -32,7 +32,10 @@
       <%= form.fields_for :addresses do |address_form| %>
 
 
-
+        <div class="field">
+          <%= address_form.label :street %>
+          <%= address_form.text_field :street, id: :address_street %>
+        </div>
           <div class="field">
             <%= address_form.label :city %>
             <%= address_form.text_field :city, id: :address_city %>

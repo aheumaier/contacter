@@ -50,11 +50,11 @@
           <tbody>
           <% @company.addresses.each_with_index do |address, index| %>
               <td><%= index+1  %>.</td>
-              <td><%= address.description %></td>
-              <td><%= address.street %></td>
-              <td><%= address.city %></td>
-              <td><%= address.zip %></td>
-              <td><%= address.country %></td>
+              <td><%= address[:description] %></td>
+              <td><%= address[:street] %></td>
+              <td><%= address[:city] %></td>
+              <td><%= address[:zip] %></td>
+              <td><%= address[:country] %></td>
               <td><span class="badge bg-yellow">70%</span></td>
               <td><%= link_to 'Show', address_path(address) %> |</td>
               </tr>

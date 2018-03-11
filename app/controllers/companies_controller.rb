@@ -5,10 +5,10 @@ class CompaniesController < ApplicationController
   # GET /companies.json
   def index
     @companies = if params[:term]
-               Company.where('name LIKE ?', "%#{params[:term]}%").page params[:page]
-             else
-               Company.all.page params[:page]
-             end
+                   Company.where(name: /#{params[:term]}/i).page params[:page]
+                 else
+                   Company.all.page params[:page]
+                 end
 
   end
 
@@ -69,6 +69,10 @@ class CompaniesController < ApplicationController
   end
 
   private
+
+
+
+
   # Use callbacks to share common setup or constraints between actions.
   def set_company
     @company = Company.find(params[:id])

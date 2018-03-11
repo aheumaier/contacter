@@ -52,7 +52,7 @@
 
     <br>
 
-    <%= paginate @contacts %>
+    <%= paginate @contacts unless params[:term] %>
 
   </section>
   <!-- /.content -->

@@ -1,4 +1,16 @@
-class User < ApplicationRecord
+class User
+  include Mongoid::Document
+
+  field :provider, type: String
+  field :uid, type: String
+  field :name, type: String
+  field :oauth_token, type: String
+  field :oauth_expires_at, type: DateTime
+  field :email, type: String
+  field :image, type: String
+  field :password, type: String
+  field :client_id, type: String
+  field :client_secret, type: String
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |user|
@@ -12,7 +24,5 @@ class User < ApplicationRecord
       user.save!
     end
   end
-
-
 
 end
