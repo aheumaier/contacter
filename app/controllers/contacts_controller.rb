@@ -6,13 +6,12 @@ class ContactsController < ApplicationController
   def index
     @contacts = if params[:term]
                   Contact.where('lname LIKE ?', "%#{params[:term]}%").or(Contact.where('email LIKE ?', "%#{params[:term]}%")).page params[:page]
+                else
+                  if request.format.csv?
+                    Contact.all
                   else
-                    if request.format.csv?
-                      Contact.all
-                    else
-                      Contact.all.page params[:page]
-                    end
-
+                    Contact.all.page params[:page]
+                  end
                 end
     respond_to do |format|
       format.html {}
