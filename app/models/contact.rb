@@ -1,3 +1,5 @@
+require 'csv'
+require 'pp'
 class Contact < ApplicationRecord
 
   belongs_to :company
@@ -15,5 +17,16 @@ class Contact < ApplicationRecord
     return hash
   end
 
+
+  def self.to_csv contacts
+
+
+    CSV.generate(headers: true) do |csv|
+      csv << Contact.column_names
+      contacts.each do |contact|
+        csv << contact.attributes.values_at(*column_names)
+      end
+    end
+  end
 
 end

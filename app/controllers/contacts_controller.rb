@@ -5,10 +5,22 @@ class ContactsController < ApplicationController
   # GET /contacts.json
   def index
     @contacts = if params[:term]
-                   Contact.where('lname LIKE ?', "%#{params[:term]}%").or(Contact.where('email LIKE ?', "%#{params[:term]}%")).page params[:page]
-                 else
-                   Contact.all.page params[:page]
-                 end
+                  Contact.where('lname LIKE ?', "%#{params[:term]}%").or(Contact.where('email LIKE ?', "%#{params[:term]}%")).page params[:page]
+                  else
+                    if request.format.csv?
+                      Contact.all
+                    else
+                      Contact.all.page params[:page]
+                    end
+
+                end
+    respond_to do |format|
+      format.html {}
+      format.csv { send_data Contact.to_csv(@contacts),
+                             :type => 'text/csv; charset=utf-8; header=present',
+                             :filename => "contacts-#{Date.today}.csv"
+      }
+    end
   end
 
   # GET /contacts/1
@@ -66,13 +78,13 @@ class ContactsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_contact
-      @contact = Contact.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_contact
+    @contact = Contact.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def contact_params
-      params.require(:contact).permit(:fname, :lname, :name, :email, :phone, :mobile, :position, :source, :company_id)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def contact_params
+    params.require(:contact).permit(:fname, :lname, :name, :email, :phone, :mobile, :position, :source, :company_id)
+  end
 end

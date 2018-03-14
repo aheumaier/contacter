@@ -22,6 +22,12 @@
         <%= submit_tag 'Search' %>
     <% end %>
 
+
+    <p>
+      Download:
+      <%= link_to "CSV", contacts_path(format: "csv") %>
+    </p>
+
     <p id="notice"><%= notice %></p>
 
     <table class="table table-striped">
